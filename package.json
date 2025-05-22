@@ -1,0 +1,22 @@
+{
+  "name": "projectweb3",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "json-server --watch ./db.json",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "build-and-start": "concurrently \"npm run server\" \"npm run preview\""
+  },
+  "devDependencies": {
+    "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "json-server": "^1.0.0-beta.3",
+    "swiper": "^11.2.6"
+  }
+}
