@@ -1,0 +1,2 @@
+env:
+  VITE_PORT: 5174  # Change Vite port in vite.config.js
