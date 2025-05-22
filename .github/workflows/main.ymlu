@@ -1,0 +1,53 @@
+name: Test Servers
+on: [push, pull_request]
+
+jobs:
+  test-servers:
+    runs-on: ubuntu-latest
+    
+    services:
+      # Container for JSON Server (runs on port 3000)
+      json-server:
+        image: node:18
+        ports:
+          - 3000:3000
+        env:
+          NODE_ENV: test
+        volumes:
+          - ./:/app
+        working-directory: /app
+        options: >-
+          --health-cmd "curl -f http://localhost:3000/posts || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Start JSON Server (in background)
+        run: npm run server &
+        
+      - name: Start Vite Dev Server (in background)
+        run: npm run dev &
+        
+      - name: Wait for servers
+        run: sleep 15  # Give servers time to start
+        
+      - name: Test JSON Server
+        run: |
+          curl -f http://localhost:3000/posts
+          echo "JSON Server is running!"
+          
+      - name: Test Vite Dev Server
+        run: |
+          curl -f http://localhost:5173
+          echo "Vite Dev Server is running!"
