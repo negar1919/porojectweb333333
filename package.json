@@ -4,13 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "server": "json-server --watch ./db.json",
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "build-and-start": "concurrently \"npm run server\" \"npm run preview\""
-  },
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "start": "node server.js", 
+  "server": "json-server --watch db.json" 
+},
   "devDependencies": {
     "vite": "^6.3.1"
   },
