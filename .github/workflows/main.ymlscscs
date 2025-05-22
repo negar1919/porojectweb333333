@@ -1,0 +1,4 @@
+- run: |
+    npm run server > server.log 2>&1 &
+    npm run dev > vite.log 2>&1 &
+    tail -f *.log
